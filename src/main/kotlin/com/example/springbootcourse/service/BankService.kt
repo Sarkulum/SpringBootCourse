@@ -11,4 +11,6 @@ class BankService(val dataSource: BankDataSource) {
         return dataSource.retrieveBanks()
     }
 
+    fun getBank(accountNumber: String): Bank = dataSource.retrieveBanks(accountNumber)
+
 }

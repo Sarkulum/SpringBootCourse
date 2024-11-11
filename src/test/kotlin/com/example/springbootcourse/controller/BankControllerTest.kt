@@ -4,7 +4,11 @@ import org.junit.jupiter.api.Assertions.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
+import java.awt.PageAttributes
+import javax.management.Query.value
 import kotlin.test.Test
 
 @SpringBootTest
@@ -16,9 +20,30 @@ class BankControllerTest {
 
     @Test
     fun `should return all banks`(){
-        //when
+        //when/then
+        mockMvc.get("/api/banks")
+            .andDo{ print() }
+            .andExpect {
+                status { isOk() }
+                content { contentType(MediaType.APPLICATION_JSON) }
+                jsonPath("$[0].accountNumber") {
+                    value("Valerie")
+                }
+            }
+    }
 
-        //then
-
+    @Test
+    fun `should return the bank and given account number`() {
+        //given
+        val accountNumber = "Valerie"
+        //when/then
+        mockMvc.get("/api/banks/$accountNumber")
+            .andDo{ print() }
+            .andExpect { status {
+                isOk() }
+                content { contentType(MediaType.APPLICATION_JSON) }
+                jsonPath("$.trust") { value("100.0") }
+                jsonPath("$.transactionFee") { value("50")}
+            }
     }
 }

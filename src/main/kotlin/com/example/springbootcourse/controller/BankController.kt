@@ -20,6 +20,11 @@ class BankController(
         return ResponseEntity("No banks found", HttpStatus.NOT_FOUND)
     }
 
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handleBadRequest(e: IllegalArgumentException): ResponseEntity<String> {
+        return ResponseEntity(e.message, HttpStatus.BAD_REQUEST)
+    }
+
     @GetMapping
     fun outputBank(): Collection<Bank> {
         return getBanks()
@@ -28,6 +33,7 @@ class BankController(
     @GetMapping("/{accountNumber}")
     fun outputAccount(@PathVariable accountNumber: String) : Bank = service.getBank(accountNumber)
 
-    @PostMapping
+    @PostMapping("/banks")
+    @ResponseStatus(HttpStatus.CREATED)
     override fun addBank(@RequestBody bank: Bank): Bank = service.addBank(bank)
 }

@@ -18,6 +18,9 @@ class MockBankDataSource : BankDataSource {
     }
 
     override fun createBank(bank: Bank): Bank {
+        if (banks.any { it.accountNumber == bank.accountNumber }) {
+            throw IllegalArgumentException("Bank with accountNumber ${bank.accountNumber} already exists")
+        }
         banks.add(bank)
 
         return bank

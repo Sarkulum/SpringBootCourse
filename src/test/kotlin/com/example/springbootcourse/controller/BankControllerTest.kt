@@ -76,9 +76,19 @@ class BankControllerTest {
     }
 
     @Test
-    fun `should return Bad Request`(){
+    fun `should return Bad Request if already exists`(){
         //given
+        val invalidBank = Bank("Valerie", 1.0, 1)
 
+        //when
+        val performPost = mockMvc.post("/api/banks"){
+            contentType = MediaType.APPLICATION_JSON
+            content = objectMapper.writeValueAsString(invalidBank)
+        }
 
+        //then
+        performPost
+            .andDo { print() }
+            .andExpect { status { isBadRequest() } }
     }
 }

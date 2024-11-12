@@ -33,7 +33,10 @@ class BankController(
     @GetMapping("/{accountNumber}")
     fun outputAccount(@PathVariable accountNumber: String) : Bank = service.getBank(accountNumber)
 
-    @PostMapping("/banks")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     override fun addBank(@RequestBody bank: Bank): Bank = service.addBank(bank)
+
+    @PatchMapping
+    override fun updateBank(@RequestBody bank: Bank): Bank = service.updateBank(bank)
 }

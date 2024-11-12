@@ -27,4 +27,7 @@ class BankController(
 
     @GetMapping("/{accountNumber}")
     fun outputAccount(@PathVariable accountNumber: String) : Bank = service.getBank(accountNumber)
+
+    @PostMapping
+    override fun addBank(@RequestBody bank: Bank): Bank = service.addBank(bank)
 }

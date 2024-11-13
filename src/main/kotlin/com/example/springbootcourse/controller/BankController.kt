@@ -39,4 +39,8 @@ class BankController(
 
     @PatchMapping
     override fun updateBank(@RequestBody bank: Bank): Bank = service.updateBank(bank)
+
+    @DeleteMapping("/{accountNumber}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    override fun deleteBank(@PathVariable accountNumber: String): Unit = service.deleteBank(accountNumber)
 }

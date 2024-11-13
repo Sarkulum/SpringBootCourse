@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @SpringBootApplication
-@RestController
 class SpringBootCourseApplication
 
 fun main(args: Array<String>) {
-    runApplication<SpringBootCourseApplication>(*args)
+    runApplication<SpringBootCourseApplication>(*args) //Don't know why there is an error there. The code works fien as far as I know.
 }

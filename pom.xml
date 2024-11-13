@@ -71,7 +71,8 @@
         <dependency>
             <groupId>io.mockk</groupId>
             <artifactId>mockk-jvm</artifactId>
-            <version>1.13.12</version>
+            <version>1.13.5</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
@@ -122,7 +123,7 @@
                         <option>all-open:annotation=jakarta.persistence.MappedSuperclass</option>
                         <option>all-open:annotation=jakarta.persistence.Embeddable</option>
                     </pluginOptions>
-                    <jvmTarget>1.8</jvmTarget>
+                    <jvmTarget>17</jvmTarget> <!--Sometimes needs to be changed if it gives you an error like "Kotlin: Cannot inline bytecode built with JVM target 17 into bytecode that is being built with JVM target 1.8. Please specify proper '-jvm-target' option." -->
                 </configuration>
                 <dependencies>
                     <dependency>

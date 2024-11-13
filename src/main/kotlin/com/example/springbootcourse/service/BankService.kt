@@ -14,5 +14,6 @@ class BankService(val dataSource: BankDataSource) {
     fun getBank(accountNumber: String): Bank = dataSource.retrieveBanks(accountNumber)
     fun addBank(bank: Bank): Bank = dataSource.createBank(bank)
     fun updateBank(bank: Bank): Bank = dataSource.addUpdatedBank(bank)
+    fun deleteBank(accountNumber: String) :Unit = dataSource.deleteBank(accountNumber)
 
 }

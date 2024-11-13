@@ -9,10 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity.notFound
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.get
-import org.springframework.test.web.servlet.patch
-import org.springframework.test.web.servlet.post
+import org.springframework.test.web.servlet.*
 import java.awt.PageAttributes
 import javax.management.Query.value
 import kotlin.test.Test
@@ -130,6 +127,20 @@ class BankControllerTest {
         //then
         performInvalidPatchRequest
             .andDo { print() }
+            .andExpect { status { isNotFound() } }
+    }
+
+    @Test
+    fun `should delete bank`(){
+        //given
+        val accountNumber = "Uwe"
+        //when
+        mockMvc.delete("/api/banks/$accountNumber")
+        //then
+            .andDo{ print() }
+            .andExpect { status { isNoContent() } }
+
+        mockMvc.get("/api/banks/$accountNumber")
             .andExpect { status { isNotFound() } }
     }
 }

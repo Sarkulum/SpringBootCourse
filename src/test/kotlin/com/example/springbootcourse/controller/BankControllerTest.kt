@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity.notFound
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.web.servlet.*
 import java.awt.PageAttributes
 import javax.management.Query.value
@@ -131,6 +132,7 @@ class BankControllerTest {
     }
 
     @Test
+    @DirtiesContext
     fun `should delete bank`(){
         //given
         val accountNumber = "Uwe"
